@@ -1,6 +1,3 @@
-// import '@bogeychan/elysia-polyfills/node/index.js'
-// import 'dotenv/config'
-
 import { Elysia, t } from 'elysia'
 
 import { generateImage } from './replicate'
@@ -36,7 +33,7 @@ const app = new Elysia()
         }
     )
     .listen({
-        port: 80,
+        port: process.env.PORT ?? 80,
         hostname: '0.0.0.0'
     })
 
