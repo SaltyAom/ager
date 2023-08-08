@@ -1,0 +1,16 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+.gallery
+    @apply grid w-full h-full
+    grid-template-columns: repeat(auto-fill, minmax(205px, 1fr))
+
+.-uploading
+    animation: uploading 90s
+    
+@keyframes uploading
+    0%
+        width: 0
+    100%
+        width: 100%

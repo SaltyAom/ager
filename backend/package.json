@@ -1,0 +1,23 @@
+{
+  "name": "ager",
+  "version": "1.0.44",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/index.ts"
+  },
+  "dependencies": {
+    "@bogeychan/elysia-polyfills": "^0.5.3",
+    "@elysiajs/cors": "^0.6.0",
+    "@elysiajs/swagger": "^0.6.0",
+    "@google-cloud/storage": "^7.0.1",
+    "@supabase/supabase-js": "^2.32.0",
+    "dotenv": "^16.3.1",
+    "elysia": "latest",
+    "replicate": "^0.15.0"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "module": "src/index.ts",
+  "types": "./src/index.ts"
+}
