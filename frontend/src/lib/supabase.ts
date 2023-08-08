@@ -21,13 +21,10 @@ export const getAgers = () =>
   supabase
     .from('ager')
     .select()
-    .then((x) => {
-      console.log({
-        x
-      })
-
-      return (x?.data as Ager[]) ?? []
+    .order('id', {
+      ascending: false
     })
+    .then((x) => (x?.data as Ager[]) ?? [])
 
 export const onNewAger = (callback: (data: Ager) => unknown) =>
   supabase
