@@ -35,7 +35,10 @@ const app = new Elysia()
             })
         }
     )
-    .listen(8080)
+    .listen({
+        port: 8080,
+        hostname: '0.0.0.0'
+    })
 
 export type App = typeof app
 
