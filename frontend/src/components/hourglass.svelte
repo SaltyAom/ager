@@ -15,8 +15,8 @@
 */
 
   $size: 100px;
-  $color: white;
-  $rock: salmon;
+  $color: black;
+  $rock: gold;
 
   @keyframes orbit-star {
     0% {
@@ -55,7 +55,7 @@
       left: $size * 0.38;
       height: $size * 0.24;
       width: $size * 0.24;
-      background: navajowhite;
+      background: salmon;
       border-radius: $size/6;
     }
   }

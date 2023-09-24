@@ -3,7 +3,6 @@
   height="80"
   viewBox="0 -960 960 960"
   width="80"
-  fill="#eee"
   stroke="currentColor"
   stroke-width="2"
   stroke-linecap="round"
