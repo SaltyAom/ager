@@ -6,7 +6,7 @@
   let image: FileList | undefined
   let isLoading = false
   let result: string | undefined
-  let previewImg
+  let previewImg: HTMLImageElement
 
   const process = async () => {
     if (isLoading) return
@@ -18,7 +18,7 @@
     if (preview) {
       const reader = new FileReader()
       reader.addEventListener('load', () => {
-        previewImg.setAttribute('src', reader.result)
+        previewImg.setAttribute('src', reader.result || '')
       })
       reader.readAsDataURL(preview)
     }
@@ -48,10 +48,10 @@
 
   <form class="flex flex-col gap-4" on:submit|preventDefault={process}>
     <section
-      class="relative flex flex-col justify-center items-center gap-3 aspect-square w-72 border-2 rounded-3xl overflow-hidden"
+      class="relative flex flex-col text-gray-200 justify-center items-center gap-3 aspect-square w-72 bg-white/10 border-2 rounded-3xl overflow-hidden"
     >
       <article
-        class="absolute flex flex-col justify-center items-center w-full h-full bg-white/10 backdrop backdrop-blur-sm p-6 transition-all {isLoading
+        class="absolute flex flex-col justify-center items-center w-full h-full backdrop backdrop-blur-sm p-6 transition-all {isLoading
           ? 'z-20'
           : 'opacity-0'}"
       >
@@ -64,23 +64,27 @@
         <Hourglass />
         <!-- <span class="loading loading-infinity transform scale-[3] mb-4 mt-auto" /> -->
         <div class="grid gap-1 text-center">
-          <h2 class="text-gray-200 text-xl">Getting your picture from the future...</h2>
+          <h2 class=" text-xl">Getting your picture from the future...</h2>
           <p class="text-gray-400 text-sm">Estimating time: 1 minute</p>
         </div>
         <div class="relative w-full h-1 bg-gray-200 rounded-full mt-auto overflow-hidden">
           <div class="w-full h-full bg-black rounded-full {isLoading ? '-uploading' : ''}" />
         </div>
       </article>
-      <input
-        class="z-10 block absolute opacity-0 w-full h-full cursor-pointer"
-        type="file"
-        disabled={isLoading}
-        bind:files={image}
-        on:change={process}
-      />
+      <article
+        class="flex flex-col gap-4 justify-center items-center {isLoading ? 'opacity-0' : 'z-20'}"
+      >
+        <input
+          class="z-10 block absolute opacity-0 w-full h-full cursor-pointer"
+          type="file"
+          disabled={isLoading}
+          bind:files={image}
+          on:change={process}
+        />
 
-      <UploadIcon class="transform w-14 h-14 text-gray-700" stroke-width={1.5} />
-      <h1 class="text-xl font-medium text-gray-700">Upload Image</h1>
+        <UploadIcon class="transform w-20 h-20 " stroke-width={0.5} />
+        <h1 class="text-xl">Upload your face</h1>
+      </article>
     </section>
   </form>
 </main>
