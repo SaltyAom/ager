@@ -116,8 +116,7 @@
     <button
       class="absolute bottom-0 m-8 px-4 py-2 flex justify-center items-center gap-2"
       on:click={() => {
-        result = ''
-        isLoading = false
+        location.reload()
       }}><UploadIcon class="w-5 h-5" fill="#eee" stroke-width={0.5} /> Get another image</button
     >
   {:else}
