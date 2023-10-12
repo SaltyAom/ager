@@ -17,7 +17,7 @@
   let streaming = false
 
   const width = 320
-  const height = width
+  const height = 240
 
   const generateQR = async (text: string) => {
     try {
@@ -51,6 +51,7 @@
       })
 
     result = undefined
+    
     const { data, error } = await api.index.put({
       image: imgFile
     })
@@ -116,7 +117,7 @@
     <button
       class="absolute bottom-0 m-8 px-4 py-2 flex justify-center items-center gap-2"
       on:click={() => {
-        location.reload()
+        location.replace(location.href)
       }}><UploadIcon class="w-5 h-5" fill="#eee" stroke-width={0.5} /> Get another image</button
     >
   {:else}
@@ -124,7 +125,7 @@
       src=""
       bind:this={previewImg}
       alt="preview"
-      class="absolute top-0 left-0 aspect-video blur-sm min-w-full min-h-full opacity-20 object-cover"
+      class="absolute top-0 left-0 blur-sm min-w-full min-h-full opacity-20 object-cover"
     />
     <form class="flex flex-col gap-4">
       <section class="relative flex flex-col text-gray-600 justify-center items-center gap-3">
@@ -171,7 +172,7 @@
               <video
                 playsinline
                 id="video"
-                class="aspect-square border object-cover"
+                class="border object-cover"
                 bind:this={vid}
                 style={`width:${width}px`}>Video stream not available.</video
               >
@@ -193,7 +194,7 @@
       </section>
     </form>
   {/if}
-  <canvas id="canvas" class="absolute opacity-0 h-[320px] aspect-square -z-50" bind:this={canvas} />
+  <canvas id="canvas" class="absolute opacity-0 h-[320px] -z-50" bind:this={canvas} />
 </main>
 
 <style>
