@@ -12,6 +12,7 @@
   let previewImg: HTMLImageElement
   let btn: HTMLButtonElement, vid: HTMLVideoElement, canvas: HTMLCanvasElement
   let qrImgSrc: string
+  let err: boolean = false
 
   let takepicture = () => {}
   let streaming = false
@@ -51,16 +52,20 @@
       })
 
     result = undefined
-    
-    const { data, error } = await api.index.put({
-      image: imgFile
-    })
-
-    isLoading = false
-    if (error) return
-
-    result = data
-    qrImgSrc = await generateQR(result || '')
+      
+    try {
+      const { data, error } = await api.index.put({
+        image: imgFile
+      })
+      isLoading = false
+      if (error) err = true
+      result = data
+      qrImgSrc = await generateQR(result || '')
+    } catch {
+      console.log("err")
+      isLoading = false
+      err = true
+    }
   }
 
   onMount(() => {
@@ -107,6 +112,17 @@
 <main
   class="flex flex-col justify-center items-center w-full min-h-screen bg-gradient-to-b from-white to-gray-50"
 >
+{#if err}
+    <article class="flex flex-col max-w-xl justify-center items-center gap-6 p-6">
+      <div class="text-4xl text-neutral-900">No picture found.</div>
+      <button
+      class="my-1 px-4 py-2 flex justify-center items-center gap-2"
+      on:click={() => {
+        location.replace(location.href)
+      }}><UploadIcon class="w-5 h-5" fill="#eee" stroke-width={0.5} />Try again.</button
+    >
+    </article>
+{:else}
   {#if result}
     <article class="flex flex-col max-w-xl justify-center items-center gap-6 p-6">
       <figure class="m-0 bg-gray-800 rounded-2xl overflow-hidden">
@@ -193,6 +209,7 @@
         {/if}
       </section>
     </form>
+  {/if}
   {/if}
   <canvas id="canvas" class="absolute opacity-0 h-[320px] -z-50" bind:this={canvas} />
 </main>
